@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Weaver's Evolution</title>
+
+  <!--
+    ATTENTION: FOR LOCAL DEVELOPMENT, YOU MUST PROVIDE YOUR GEMINI API KEY BELOW.
+    1. Obtain your valid Gemini API Key.
+    2. Paste it into the "GEMINI_API_KEY" field within the JSON content of the
+       <script id="dev-api-key-config"> block below.
+       Replace "YOUR_GEMINI_API_KEY_GOES_HERE_FOR_LOCAL_DEVELOPMENT_ONLY"
+       with your actual key string.
+    3. SAVE THIS FILE and reload index.html in your browser.
+    4. Check the browser's developer console for messages starting with
+       "INDEX.HTML (API Key Setup Script):".
+
+    IMPORTANT:
+    - If you still get "API key not valid" (400) errors after setting this,
+      THE API KEY STRING ITSELF IS LIKELY THE PROBLEM (invalid, expired,
+      wrong permissions on Google Cloud, billing issue, etc.).
+      Double-check the key value you entered.
+    - DO NOT COMMIT YOUR ACTUAL API KEY TO VERSION CONTROL if this file is versioned.
+  -->
+  <script id="dev-api-key-config" type="application/json">
+  {
+    "GEMINI_API_KEY": "YOUR_GEMINI_API_KEY_GOES_HERE_FOR_LOCAL_DEVELOPMENT_ONLY"
+  }
+  </script>
+  <script>
+    // --- START OF CRITICAL LOCAL DEVELOPMENT API KEY INJECTION ---
+    console.log("----------------------------------------------------------------------");
+    console.log("INDEX.HTML (API Key Setup Script): Initializing...");
+    window.process = window.process || { env: {} }; // Ensure process and process.env exist
+    window.process.env = window.process.env || {};
+
+    try {
+      const configElement = document.getElementById('dev-api-key-config');
+      if (configElement && configElement.textContent) {
+        const config = JSON.parse(configElement.textContent);
+        const apiKeyFromConfig = config.GEMINI_API_KEY;
+
+        if (apiKeyFromConfig && apiKeyFromConfig !== "YOUR_GEMINI_API_KEY_GOES_HERE_FOR_LOCAL_DEVELOPMENT_ONLY" && apiKeyFromConfig.trim() !== "") {
+          window.process.env.API_KEY = apiKeyFromConfig.trim();
+          const keyPreview = `${window.process.env.API_KEY.substring(0, 5)}...${window.process.env.API_KEY.slice(-4)}`;
+          console.info(`INDEX.HTML (API Key Setup Script): SUCCESS! 'process.env.API_KEY' has been SET from the <script id="dev-api-key-config"> block. Preview: ${keyPreview}`);
+          console.info("INDEX.HTML (API Key Setup Script): The application will now attempt to use this key.");
+          if (window.process.env.API_KEY.length < 30) { // Typical API keys are longer
+              console.warn("INDEX.HTML (API Key Setup Script): WARNING! The API key from <script id='dev-api-key-config'> seems short. Please double-check it's the full, correct key.");
+          }
+        } else {
+          window.process.env.API_KEY = ""; // Explicitly set to empty if not found or placeholder
+          console.error("INDEX.HTML (API Key Setup Script): CRITICAL! API Key NOT FOUND or is still the placeholder value in the <script id='dev-api-key-config'> block within index.html.");
+          console.error("INDEX.HTML (API Key Setup Script): You MUST edit index.html, find this <script> block, and replace the placeholder with your actual Gemini API key.");
+          console.error("INDEX.HTML (API Key Setup Script): 'process.env.API_KEY' is now an empty string. The application will show an API key error.");
+        }
+      } else {
+        window.process.env.API_KEY = ""; // Explicitly set to empty if config block missing
+        console.error("INDEX.HTML (API Key Setup Script): CRITICAL! The <script id='dev-api-key-config'> block was not found or is empty in index.html.");
+        console.error("INDEX.HTML (API Key Setup Script): Ensure this block exists and contains your API key for local development.");
+      }
+    } catch (e) {
+      window.process.env.API_KEY = ""; // Explicitly set to empty on error
+      console.error("INDEX.HTML (API Key Setup Script): ERROR processing the API key from <script id='dev-api-key-config'>:", e);
+      console.error("INDEX.HTML (API Key Setup Script): Please check the JSON format in the script block if you edited it. 'process.env.API_KEY' is now an empty string.");
+    }
+    console.log("----------------------------------------------------------------------");
+    // --- END OF CRITICAL LOCAL DEVELOPMENT API KEY INJECTION ---
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0px)' },
+            },
+          },
+          animation: {
+            fadeIn: 'fadeIn 0.5s ease-out forwards',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #0F172A; 
+      color: #F1F5F9; 
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.4.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
