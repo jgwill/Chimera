@@ -1,0 +1,53 @@
+{
+  "timestamp": "2025-11-17T00:48:00.458619",
+  "traces_analyzed": [
+    {
+      "id": "miette_claude_plan_perspective_script_trace_e1c309b5-0019-48e1-858d-85504eb35cb4",
+      "status": "pending_fetch",
+      "analysis": {},
+      "agent": "Miette",
+      "integration": "Claude AI"
+    },
+    {
+      "id": "bbf30c64-d387-461a-8bf3-e3665ff44db7-plan-perspective",
+      "status": "pending_fetch",
+      "analysis": {},
+      "type": "planning-perspective"
+    },
+    {
+      "id": "bbf30c64-d387-461a-8bf3-e3665ff44db7-plan-2511120257",
+      "status": "pending_fetch",
+      "analysis": {},
+      "approximate_date": "2025-11-12"
+    },
+    {
+      "id": "adac5688-d55b-4cb4-a9a4-9e0d6133fbbb-plan-perspective-2511120455",
+      "status": "pending_fetch",
+      "analysis": {},
+      "type": "planning-perspective",
+      "approximate_date": "2025-11-12"
+    },
+    {
+      "id": "7cf8b569-9740-4e9e-bab1-5d7358457ae3-1",
+      "status": "pending_fetch",
+      "analysis": {}
+    }
+  ],
+  "patterns_observed": {
+    "agent_types": [
+      "Claude",
+      "Miette"
+    ],
+    "ritual_patterns": [],
+    "planning_perspectives": [
+      "bbf30c64-d387-461a-8bf3-e3665ff44db7-plan-perspective",
+      "adac5688-d55b-4cb4-a9a4-9e0d6133fbbb-plan-perspective-2511120455"
+    ],
+    "team_model_elements": []
+  },
+  "insights": [
+    "Recent activity: traces from November 12, 2025",
+    "Planning perspective workflow detected - multi-agent collaboration pattern",
+    "Miette agent engaged in plan perspective script generation"
+  ]
+}
